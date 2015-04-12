@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <random>
 
 #define GLEW_STATIC
 #include <GL\glew.h>
@@ -13,8 +14,12 @@
 #include "Shader.h"
 #include "camera.h"
 #include "Model.h"
+#include "Wave.h"
 
 #include "SOIL.h"
+
+#define PI 3.14159265
+#define NUM_WAVES 4
 
 using namespace std;
 using namespace glm;
@@ -28,6 +33,12 @@ void Do_Movement();
 // Properties
 GLuint screenWidth = 800, screenHeight = 600;
 
+// Waves
+GLfloat amplitudes[NUM_WAVES];
+GLfloat waveLengths[NUM_WAVES];
+GLfloat speeds[NUM_WAVES];
+GLfloat directions[NUM_WAVES*2];
+
 // Camera
 Camera camera(vec3 (0.0f, 0.0f, 3.0f));
 bool keys[1024];
@@ -37,6 +48,30 @@ bool firstMouse = true;
 GLfloat deltaTime = 0.0f;
 GLfloat lastFrame = 0.0f;
 
+GLfloat mA = 0.15f;
+GLfloat mL = 2.5f;
+GLfloat mS = 0.5f;
+//vec2 mD = vec2(1.0f, 1.0f);
+GLdouble theta = 4.0f;
+
+void createWaves()
+{
+	default_random_engine generator;
+	uniform_real_distribution<float> randL(mL/2.0f, mL * 2.0f);
+	uniform_real_distribution<float> randS(mS / 2.0f, mS * 2.0f);
+	uniform_real_distribution<double> randAngle(-theta, theta);
+	uniform_real_distribution<float> randDir(0.0f, 1.0f);
+	vec2 mD = vec2(randDir(generator), randDir(generator));
+
+	for (int i = 0, j = 0; i < 4; i++, j+=2)
+	{
+		waveLengths[i] = randL(generator);
+		amplitudes[i] = (waveLengths[i] / mL) * mA;
+		speeds[i] = randS(generator);
+		directions[j] = (float)sin(randAngle(generator) ) * mD.x;
+		directions[j + 1] = (float)sin(randAngle(generator) ) * mD.y;
+	}
+}
 
 int main()
 {
@@ -78,7 +113,12 @@ int main()
 
 	Shader ourShader("default.vert", "default.frag");
 
-	Model ourModel("nanosuit/nanosuit.obj");
+	Model ourModel("grid.obj");
+
+	// Draw in wireframe
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+	createWaves();
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -94,6 +134,20 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		ourShader.use();
+
+		// Time
+		GLint time = glGetUniformLocation(ourShader.program, "time");;
+		glUniform1f(time, currentFrame);
+
+		GLint amps = glGetUniformLocation(ourShader.program, "A");
+		GLint waveLen = glGetUniformLocation(ourShader.program, "L");
+		GLint speed = glGetUniformLocation(ourShader.program, "speed");
+		GLint dir = glGetUniformLocation(ourShader.program, "D");
+
+		glUniform1fv(amps, sizeof(amplitudes), amplitudes);
+		glUniform1fv(waveLen, sizeof(waveLengths), waveLengths);
+		glUniform1fv(speed, sizeof(speeds), speeds);
+		glUniform2fv(dir, sizeof(directions), directions);
 
 		// Transformation Matrices
 		mat4 projection = perspective(camera.Zoom, (float)screenWidth / (float)screenHeight, 0.1f, 100.0f);
