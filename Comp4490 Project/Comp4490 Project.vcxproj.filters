@@ -35,15 +35,18 @@
     <ClInclude Include="Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Wave.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="default.vert">
+    <None Include="wave.frag">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="default.frag">
+    <None Include="wave.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="skybox.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="skybox.vert">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

@@ -41,8 +41,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Cody\OpenGL\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Cody\OpenGL\Libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Cody\Documents\Winter 2015\Comp4490\Project\Comp4490-Project\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Cody\Documents\Winter 2015\Comp4490\Project\Comp4490-Project\Libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -88,11 +88,12 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Shader.h" />
-    <ClInclude Include="Wave.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="default.frag" />
-    <None Include="default.vert" />
+    <None Include="skybox.frag" />
+    <None Include="skybox.vert" />
+    <None Include="wave.frag" />
+    <None Include="wave.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

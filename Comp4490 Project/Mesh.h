@@ -51,7 +51,7 @@ public:
 		GLuint specularNr = 1;
 		for (GLuint i = 0; i < this->textures.size(); i++)
 		{
-			glActiveTexture(GL_TEXTURE0 + i);
+			glActiveTexture(GL_TEXTURE1 + i);
 
 			stringstream ss;
 			string number;
