@@ -7,6 +7,7 @@ in vec3 pos;
 in mat3 TBN;
 in vec2 texConst;
 
+// Water Constants, Assuming colour of natural light is white
 vec4 Ka = vec4(0.31f, 0.54f, 0.75f, 1.0f);
 vec4 Kd = vec4(0.5f, 0.65f, 0.75f, 1.0f);
 vec4 Ks = vec4(1.0f, 1.0f, 1.0f,  1.0f);

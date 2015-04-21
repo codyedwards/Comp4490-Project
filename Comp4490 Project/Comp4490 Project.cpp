@@ -56,6 +56,7 @@ bool firstMouse = true;
 GLfloat deltaTime = 0.0f;
 GLfloat lastFrame = 0.0f;
 
+// Wave constraints
 GLfloat mA = 0.1f;
 GLfloat mL = 8.0f;
 GLfloat mS = 1.0f;
@@ -109,6 +110,7 @@ int main()
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
 	GLFWwindow* window = glfwCreateWindow(screenWidth, screenHeight, "Cody Edwards Comp4490 Project", nullptr, nullptr);
+	glfwSetWindowPos(window, 1000, 100);
 	glfwMakeContextCurrent(window);
 	if (window == NULL)
 	{
@@ -230,6 +232,8 @@ int main()
 	cout << "Shift Down Arrow -> Move light out" << endl;
 	cout << "               - -> Decrease steepness of waves" << endl;
 	cout << "               = -> Increase steepness of waves" << endl;
+	cout << "   Use WASD and the mouse to move the camera" << endl;
+	cout << "   Use scroll wheel to zoom in and out" << endl;
 
 	while (!glfwWindowShouldClose(window))
 	{

@@ -104,15 +104,15 @@ vec3 calcB(int i, float WA, float C, float S, float q)
 
 void main()
 {
-	vec3 H = vec3(0.0f, 0.0f, 0.0f);
-	vec3 T = vec3(0.0f, 0.0f, 0.0f);
-	float WA[4];
-	float w[4];
-	float S[4];
-	float C[4];
-	float q[4];
-	vec3 N = vec3(0.0f, 0.0f, 0.0f);
-	vec3 B = vec3(0.0f, 0.0f, 0.0f);
+	vec3 H = vec3(0.0f, 0.0f, 0.0f); // Sum of waves
+	vec3 T = vec3(0.0f, 0.0f, 0.0f); // Tangent
+	float WA[4]; // Used to calculate normal
+	float w[4]; // frequencies
+	float S[4]; // Used to calculate normal
+	float C[4]; // Used to calculate normal
+	float q[4]; // Steepness of wave
+	vec3 N = vec3(0.0f, 0.0f, 0.0f); // Normal
+	vec3 B = vec3(0.0f, 0.0f, 0.0f); // BiNormal
 
 
 	//Calc w
